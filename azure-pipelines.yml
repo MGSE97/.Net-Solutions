@@ -1,0 +1,49 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-2019'
+
+variables:
+  buildConfigurationDebug: 'Debug'
+  buildConfigurationRelease: 'Release'
+
+steps:
+- task: DotNetCoreInstaller@0
+  displayName: 'DotNetCore 2.2 Installation'
+  inputs:
+    version: '2.2'
+- task: DotNetCoreCLI@2
+  displayName: 'DotNet restore'
+  inputs:
+    command: restore
+    projects: '**/*.csproj'
+- task: DotNetCoreCLI@2
+  displayName: 'DotNet Build Debug'
+  inputs:
+    command: build
+    projects: '**/*.csproj'
+    arguments: '--configuration $(buildConfigurationDebug)'
+- task: DotNetCoreCLI@2
+  displayName: 'DotNet Test Debug'
+  inputs:
+    command: test
+    projects: '**/*.csproj'
+    arguments: '--configuration $(buildConfigurationDebug)'
+- task: DotNetCoreCLI@2
+  displayName: 'DotNet Build Release'
+  inputs:
+    command: build
+    projects: '**/*.csproj'
+    arguments: '--configuration $(buildConfigurationRelease)'
+- task: DotNetCoreCLI@2
+  displayName: 'DotNet Test Release'
+  inputs:
+    command: test
+    projects: '**/*.csproj'
+    arguments: '--configuration $(buildConfigurationRelease)'
