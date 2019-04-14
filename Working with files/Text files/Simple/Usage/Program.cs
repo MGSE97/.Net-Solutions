@@ -24,6 +24,19 @@ namespace Usage
                 Console.WriteLine("\n\t File method:\n");
                 Console.WriteLine(Read.File());
             #endregion
+
+            #region Writing
+                Console.WriteLine("\n\nWriting");
+
+                Console.WriteLine($"\n\t FileStream method:\t{Write.FileStream()}\n");
+
+                Console.WriteLine($"\n\t TextWriter method:\t{Write.TextWriter()}\n");
+
+                Console.WriteLine($"\n\t FileInfo method:\t{Write.FileInfo()}\n");
+
+                Console.WriteLine($"\n\t File method:\t\t{Write.File()}\n");
+            #endregion
+
         }
     }
 }
